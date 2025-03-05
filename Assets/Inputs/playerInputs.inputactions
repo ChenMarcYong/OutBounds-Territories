@@ -1,5 +1,5 @@
 {
-    "name": "playerInputs",
+    "name": "PlayerInputs",
     "maps": [
         {
             "name": "Player",
@@ -33,18 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ascend",
-                    "type": "Value",
-                    "id": "9a671c37-4c1c-407d-8373-a32532e78fa3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Thrust",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "c387a50b-876f-4be0-ae6a-16886d9af27e",
+                    "id": "30cf57ae-848c-4fe8-872b-7f2c1a8ce880",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -273,46 +264,13 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "48b5cc19-911b-46bc-83f3-ad9e230e8bce",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ascend",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "fc4f18ad-d617-4eb0-82f9-6acd2d9e69c6",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ascend",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "af634c5e-5e98-49de-a53e-c8126b69961d",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ascend",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
-                    "id": "616c31ea-cc8a-404c-b2a3-ca5cdbfdcc4e",
-                    "path": "<Keyboard>/ctrl",
+                    "id": "7cacbb57-de5d-4e11-b86c-9550c53bc4c9",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Thrust",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
