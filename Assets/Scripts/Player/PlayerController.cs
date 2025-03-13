@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player Movement")]
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
-    public float rotationSpeed = 2f;
+    public float rotationSpeed = 0.67f;
+    public float runSpeedMultiplyer = 1f;
 
 
     [Header("Camera Settings")]
@@ -22,8 +23,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     private Vector2 lookInput;
+    private Vector3 moveDirection;
     private bool isGrounded;
+    private bool isRunning;
+    public GameObject LookAt;
 
+    
     private float xRotation = 0f;
     private float mouseX;
     private float mouseY;
@@ -43,11 +48,13 @@ public class PlayerController : MonoBehaviour
         {
             cameraTransform = virtualCamera.transform;
         }
+        isRunning = false;
     }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -58,21 +65,43 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+        if (isGrounded) moveDirection = transform.forward * moveInput.y * runSpeedMultiplyer + transform.right * moveInput.x;
 
-
-        Vector3 moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
 
-        transform.Rotate(Vector3.up * mouseX);
-        virtualCamera.transform.position = transform.position;
-        virtualCamera.transform.rotation = transform.rotation;
+        //virtualCamera.transform.position = transform.position;
+        //virtualCamera.transform.rotation = transform.rotation;
 
         xRotation -= mouseY; // Inverser car dans Unity, +Y baisse la caméra
         xRotation = Mathf.Clamp(xRotation, -verticalClamp, verticalClamp);
 
+
+        if (Cursor.lockState == CursorLockMode.Locked) 
+        {
+            
+            LookAt.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            transform.Rotate(Vector3.up * mouseX);
+        } 
+
+        HandleCursorLock();
         //cameraTransform.localRotation.x = Quaternion.Euler(xRotation, 0f, 0f);
     }
 
+
+    void HandleCursorLock()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else if (Input.GetMouseButtonDown(0) && Cursor.lockState == CursorLockMode.None)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
 
 
     // ------------On Functions------------
@@ -81,8 +110,15 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        
+    }
 
+    public void OnRun(InputAction.CallbackContext context) 
+    {
+        if (context.performed) 
+        {
+            isRunning = !isRunning;
+            runSpeedMultiplyer = isRunning ? 1.5f : 1f;
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
