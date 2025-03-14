@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
     public float rotationSpeed = 0.67f;
-    public float runSpeedMultiplyer = 1f;
+    public float runSpeedMultiplyer = 1.5f;
 
 
     [Header("Camera Settings")]
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection;
     private bool isGrounded;
     private bool isRunning;
+    private float speedMult = 1f;
     public GameObject LookAt;
 
     
@@ -65,8 +66,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        if (isGrounded) moveDirection = transform.forward * moveInput.y * runSpeedMultiplyer + transform.right * moveInput.x;
+
+        //if (isGrounded) moveDirection = transform.forward * moveInput.y * runSpeedMultiplyer + transform.right * moveInput.x;
+        //UnityEngine.Debug.Log(moveInput.y);
+        if(moveInput.y == 1) moveDirection = transform.forward * moveInput.y * speedMult + transform.right * moveInput.x;
+        else moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
 
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
 
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed) 
         {
             isRunning = !isRunning;
-            runSpeedMultiplyer = isRunning ? 1.5f : 1f;
+            speedMult = isRunning ? runSpeedMultiplyer : 1f;
         }
     }
 
@@ -129,7 +133,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
 
-        UnityEngine.Debug.Log("Jump");
+        //UnityEngine.Debug.Log("Jump");
     }
 
     public void OnLook(InputAction.CallbackContext context)
