@@ -51,7 +51,7 @@ public class SpaceShipInteraction : MonoBehaviour
         Quaternion targetRotation = teleportPoint.rotation;
 
         // Inverser uniquement l'axe Z
-        Quaternion newRotation = Quaternion.Euler(targetRotation.eulerAngles.x, targetRotation.eulerAngles.y, -targetRotation.eulerAngles.z);
+        Quaternion newRotation = Quaternion.Euler(targetRotation.eulerAngles.x, targetRotation.eulerAngles.y - 180, targetRotation.eulerAngles.z);
 
         // Appliquer la nouvelle rotation au joueur
         player.transform.rotation = newRotation; 
