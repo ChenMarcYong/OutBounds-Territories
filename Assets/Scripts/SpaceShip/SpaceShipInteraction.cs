@@ -58,6 +58,24 @@ public class SpaceShipInteraction : MonoBehaviour
         // Ajoute ici les actions à effectuer (monter dans le vaisseau, ouvrir un menu, etc.)
     }
 
+
+    /*void InteractWithSpaceship2()
+    {
+        if (!SwitchControlManagement.instance.IsInSpaceship())
+        {
+            // Si on est en mode Joueur, passer au mode Vaisseau
+            UnityEngine.Debug.Log("Le joueur est dans le vaisseau !");
+
+            SwitchControlManagement.instance.SwitchToSpaceShipController();
+        }
+        else
+        {
+            // Si on est déjà dans le vaisseau, repasser en mode Joueur
+            UnityEngine.Debug.Log("Le joueur sort du vaisseau !");
+            SwitchControlManagement.instance.SwitchToPlayerController();
+        }
+    }*/
+
     // Affiche la sphère dans l'éditeur pour voir le rayon d'interaction
     void OnDrawGizmosSelected()
     {

@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     public CinemachineVirtualCamera virtualCamera;
     private Transform cameraTransform;
 
+
+    /*[Header("Player Mapping")]
+    public PlayerInput playerInput;*/
+
+
     private Rigidbody rb;
     private Vector2 moveInput;
     private Vector2 lookInput;
