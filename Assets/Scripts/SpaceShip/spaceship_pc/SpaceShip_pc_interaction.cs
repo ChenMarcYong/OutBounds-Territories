@@ -48,6 +48,8 @@ public class SpaceShip_pc_interaction : MonoBehaviour
                 InteractWithPC2();
                 StartCoroutine(ResetSwitch());
             }
+
+
         }
     }
 
